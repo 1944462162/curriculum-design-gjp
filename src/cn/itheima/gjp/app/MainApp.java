@@ -3,7 +3,7 @@ package cn.itheima.gjp.app;
 import cn.itheima.gjp.web.MainJFrame;
 
 /*
- * 程序的入口  
+ * 程序的入口  w
  *   这里就是负责整个项目开始的  
  *     里面包含了一个 main方法
 */
