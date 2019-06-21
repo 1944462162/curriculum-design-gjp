@@ -79,7 +79,7 @@ public class DateChooser extends JPanel{
         initCalendarPanel();
     }
     
-    public static DateChooser getInstance(java.util.Date date, String format){
+    private static DateChooser getInstance(java.util.Date date, String format){
         return new DateChooser(date, format, defaultStartDAY);
     }
 
@@ -198,7 +198,7 @@ public class DateChooser extends JPanel{
         private static final long serialVersionUID = -2865282186037420798L;
         private JLabel preYear,preMonth,center,nextMonth,nextYear,centercontainer;
         
-        public TitlePanel(){
+        TitlePanel(){
             super(new java.awt.BorderLayout());
             this.setBackground(new java.awt.Color(190, 200, 200));
             initTitlePanel();
@@ -248,7 +248,7 @@ public class DateChooser extends JPanel{
             JLabel label;
             private int type, value;
             
-            public MyMouseAdapter(final JLabel label, final int type, final int value){
+            MyMouseAdapter(final JLabel label, final int type, final int value){
                 this.label = label;
                 this.type = type;
                 this.value = value;
@@ -276,7 +276,7 @@ public class DateChooser extends JPanel{
         
         private static final long serialVersionUID = 5677718768457235447L;
         
-        public BodyPanel(){
+        BodyPanel(){
             super(new GridLayout(7, 7));
             this.setPreferredSize(new java.awt.Dimension(210, 140));
             initMonthPanel();
@@ -284,7 +284,7 @@ public class DateChooser extends JPanel{
         private void initMonthPanel(){
             updateDate();
         }
-        public void updateDate() {
+        void updateDate() {
             this.removeAll();
             lm.clear();
             java.util.Date temp = calendar.getTime();
@@ -293,7 +293,6 @@ public class DateChooser extends JPanel{
             cal.set(Calendar.DAY_OF_MONTH, 1);
             
             int index = cal.get(Calendar.DAY_OF_WEEK);
-            // �ӵ���1��ǰ�ƣ�һֱ�ƶ��������ʾ�ĵ�һ���ǰһ�죻��-index + defaultStartDAYΪ����ʱ��Ϊ�������ӵ���1��֮��ʼ��ʾ����Ҫǰ��һ�ܣ�ȷ��������ʾ��ȫ
             if(index > defaultStartDAY) cal.add(Calendar.DAY_OF_MONTH, -index + defaultStartDAY);
             else cal.add(Calendar.DAY_OF_MONTH, -index + defaultStartDAY - 7);
             
@@ -315,7 +314,7 @@ public class DateChooser extends JPanel{
         private static final long serialVersionUID = 8135037333899746736L;
         private JLabel dateLabel;
         
-        public FooterPanel(){
+        FooterPanel(){
             super(new BorderLayout());
             initFooterPanel();
         }
@@ -345,7 +344,7 @@ public class DateChooser extends JPanel{
             });
             this.add(dateLabel);
         }
-        public void updateDate(){};
+        void updateDate(){}
     }
     //refresh all panel
     private void refresh() {
@@ -360,7 +359,7 @@ public class DateChooser extends JPanel{
         private static final long serialVersionUID = -8053965084432740110L;
         private String name;
         
-        public WeekLabel(int index, String name){
+        WeekLabel(int index, String name){
             super(name, JLabel.CENTER);
             this.name = name;
         }
@@ -375,7 +374,7 @@ public class DateChooser extends JPanel{
         private boolean isSelected;
         private int year, month, day;
         
-        public DayLabel(Calendar cal){
+        DayLabel(Calendar cal){
             super(""+cal.get(Calendar.DAY_OF_MONTH), JLabel.CENTER);
             this.year = cal.get(Calendar.YEAR);
             this.month = cal.get(Calendar.MONTH);
@@ -388,10 +387,10 @@ public class DateChooser extends JPanel{
             else this.setForeground(java.awt.Color.LIGHT_GRAY);
             
         }
-        public boolean getIsSelected() {
+        boolean getIsSelected() {
             return isSelected;
         }
-        public void setSelected(boolean b, boolean isDrag) {
+        void setSelected(boolean b, boolean isDrag) {
             isSelected = b;
             if (b && !isDrag) {
                 int temp = calendar.get(Calendar.MONTH);
@@ -488,24 +487,23 @@ public class DateChooser extends JPanel{
     private class LabelManager {
         private List<DayLabel> list;
         
-        public LabelManager(){
-            list = new ArrayList<DateChooser.DayLabel>();
+        LabelManager(){
+            list = new ArrayList<>();
         }
         
-        public List<DayLabel> getLabels(){
+        List<DayLabel> getLabels(){
             return list;
         }
-        public void addLabel(DayLabel label){
+        void addLabel(DayLabel label){
             list.add(label);
         }
-        public void clear() {
+        void clear() {
             list.clear();
         }
-        public void setSelect(Point p, boolean b) {
-            //������϶�,��Ҫ�Ż�һ��,�����Ч��  
+        void setSelect(Point p, boolean b) {
+
             if (b) {
-                //��ʾ�Ƿ��ܷ���,���ñȽ������еı�ǩ,�ܷ��صı�־���ǰ���һ����ǩ��  
-                //��Ҫ��ʾ�ı�ǩ�ҵ��˾Ϳ�����  
+
                 boolean findPrevious = false, findNext = false;
                 for (DayLabel lab : list) {
                     if (lab.contains(p)) {
@@ -531,11 +529,9 @@ public class DateChooser extends JPanel{
             }
         }
     }
-    
-    
-    /**
-     * @param args
-     */
+
+
+
     public static void main(String[] args) {
         JFrame jf = new JFrame("Date Picker Test");
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
